@@ -43,7 +43,7 @@ const jwtOptions = {
 };
 
 //We are going to get the payload argument from an incoming rquest.
-//THe payload argument is coming from the function that wwe will create in authRoutes
+//The payload argument is coming from the function that wwe will create in authRoutes
 //done is the function we call once we trie to authenticate this user.
 const jwtLogin = new JwtStrategy(jwtOptions, async(payload, done)=>{
     try {
