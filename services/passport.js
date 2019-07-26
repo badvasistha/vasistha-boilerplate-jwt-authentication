@@ -42,4 +42,26 @@ const jwtOptions = {
     secretOrKey: config.secret
 };
 
+//We are going to get the payload argument from an incoming rquest.
+//THe payload argument is coming from the function that wwe will create in authRoutes
+//done is the function we call once we trie to authenticate this user.
+const jwtLogin = new JwtStrategy(jwtOptions, async(payload, done)=>{
+    try {
+        const user = await User.findById(payload.sub)
+        if(user){
+            done(null, user);
+        } else{
+            done(null, false);
+        } 
+    } catch (e) {
+        
+    }
+});
+
+//This tells passport that we dedclared these strategies.
+//The local login says we have a strategy called 'Loacal'
+//THe jwtLogin says we have a strategy called jwt
+
+//When we say passport.authenticate('jwt'), passport will look for a strategy called 'jwt'
 passport.use(localLogin);
+passport.use(jwtLogin)
