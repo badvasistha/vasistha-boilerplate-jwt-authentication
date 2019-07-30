@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 
 const validator = require('validator');
 
-const validateEmail = function(email){
+const validateEmail = function (email) {
     return validator.isEmail(email);
 };
 
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
         type: String,
         unique: true,
         required: true,
-        lowercase: true, 
+        lowercase: true,
         validate: [
             validateEmail,
             'Please enter a valid email address'
@@ -24,10 +24,16 @@ const UserSchema = new Schema({
     password: {
         type: String,
         required: true
-    }
-});
+    },
+    todos: [
+        {
+            ref: 'Todo',
+            type: Schema.Types.ObjectId
+        }
+    ]
+    });
 
-UserSchema.pre('save', async function(next){
+UserSchema.pre('save', async function (next) {
     const user = this;
     try {
         const salt = await bcrypt.genSalt();
@@ -41,7 +47,7 @@ UserSchema.pre('save', async function(next){
     }
 });
 
-UserSchema.methods.comparePassword = async function(candidatePassword, callback){
+UserSchema.methods.comparePassword = async function (candidatePassword, callback) {
     const user = this;
     try {
         const isMatch = await bcrypt.compare(candidatePassword, user.password);
@@ -50,7 +56,5 @@ UserSchema.methods.comparePassword = async function(candidatePassword, callback)
         callback(e);
     }
 };
-
 const User = mongoose.model('User', UserSchema);
-
 module.exports = User;
