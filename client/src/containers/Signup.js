@@ -15,12 +15,11 @@ class Signup extends Component {
       )
     }
   }
-  renderInput = ({input, label, meta}) => {
-    console.log(meta)
+  renderInput = ({input, label, type, meta}) => {
     return(
       <div>
         <label>{label}</label>
-        <input {...input} autoComplete = 'off'/>
+        <input type={type} {...input} autoComplete = 'off'/>
         {this.renderErrors(meta)}
       </div>
     )
@@ -52,7 +51,7 @@ class Signup extends Component {
           <Field
             name='password'
             type='password'
-            label = 'password'
+            label='password'
             component = {this.renderInput}
             autoComplete='none'/>
         </fieldset>
