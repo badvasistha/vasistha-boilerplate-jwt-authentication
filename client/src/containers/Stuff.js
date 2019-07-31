@@ -11,6 +11,7 @@ class Stuff extends Component {
   }
 }
 
+
 function mapStateToProps({ counter }) {
   return { counter: counter.counter };
 }
