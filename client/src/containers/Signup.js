@@ -25,7 +25,6 @@ class Signup extends Component {
     )
   }
 
-
   onSubmit = formProps => {
     console.log(formProps);
     this.props.signup(formProps, () => {
@@ -38,7 +37,6 @@ class Signup extends Component {
     return (
       <form onSubmit={handleSubmit(this.onSubmit)}>
         <fieldset>
-      
           <Field
             name='email'
             type='text'
@@ -60,6 +58,10 @@ class Signup extends Component {
     )
   }
 }
+
+// function mapStateToProps({ auth }) {
+//   return { errorMessage: auth.errorMessage };
+// }
 
 function mapStateToProps(state) {
   return { errorMessage: state.auth.errorMessage };

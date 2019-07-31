@@ -13,8 +13,8 @@ class Signin extends Component {
     });
   }
 
-  renderInput = ({ input }) => {
-    return <input {...input}/>;
+  renderInput = ({ input , type}) => {
+    return <input type = {type} {...input}/>;
   }
 
   render() {
